@@ -1,0 +1,2 @@
+# This cron job checks for certificate renewal daily at midnight
+0 0 * * * root certbot renew --quiet
