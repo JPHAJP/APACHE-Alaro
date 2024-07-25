@@ -49,8 +49,28 @@ You will have to chenge example.com and www.example.com with your domain.
     #Web is on?
     Get into browser and navigate to http://localhost and https://localhost (or the appropriate domain/IP if you're using a remote server).
 
+9. Troubleshot:
+    #Docker instalation without internet?
+    docker run --rm busybox ping -c 4 google.com
+    #then:
+    docker run --rm --network host busybox ping -c 4 google.com
+    #If ping work must add a DNS conf file:
+        sudo nano /etc/docker/daemon.json
+        file:
+            {
+                "dns": ["8.8.8.8", "8.8.4.4"]
+            }
+        sudo systemctl restart docker
+        docker run --rm busybox ping -c 4 google.com
+        docker run --rm busybox cat /etc/resolv.conf
 
+10. Docker:
+    docker stop web-php
+    docker rm web-php
+    docker run web-php
 
-
-    
+11. Free port 80 and 443
+    Check port:
+        sudo ss -tuln | grep :80
+        sudo ss -tuln | grep :443
 

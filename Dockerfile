@@ -11,7 +11,8 @@ COPY . /var/www/html/
 RUN apt-get update && apt-get install -y \
     certbot \
     python3-certbot-apache \
-    cron
+    cron \
+    nano
 
 # Set the appropriate permissions (optional, adjust as necessary)
 RUN chown -R www-data:www-data /var/www/html
