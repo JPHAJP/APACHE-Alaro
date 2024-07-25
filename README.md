@@ -6,6 +6,13 @@ Install git and clone this repository on your mageia system:
     cd /path/to/your/project
     git clone https://github.com/JPHAJP/APACHE-Alaro.git
 
+Add all php files and site to the project directory.
+    /path/to/project/APACHE-Alaro
+    ├── Dockerfile
+    ├── index.php
+    ├── other-php-files.php
+    ├── assets/
+    └── ...
 
 Instructions to install docker on mageia:
 Run the following commands:
@@ -18,3 +25,9 @@ Run the following commands:
     #Check version and functionality
     docker --version
     docker run hello-world
+
+Build docker:
+    docker build -t php-webservice .
+
+Run docker container:
+    docker run -d -p 8080:80 --name web-php php-webservice
