@@ -7,14 +7,14 @@ WORKDIR /var/www/html
 # Copy the current directory contents into the container at /var/www/html
 COPY . /var/www/html/
 
-# Install Certbot, dependencies, and cron
+# Install Certbot, dependencies, and cron in a single layer
 RUN apt-get update && apt-get install -y \
     certbot \
     python3-certbot-apache \
-    cron \
-    nano
+    cron && \
+    rm -rf /var/lib/apt/lists/*
 
-# Set the appropriate permissions (optional, adjust as necessary)
+# Set appropriate permissions
 RUN chown -R www-data:www-data /var/www/html
 
 # Copy the cron job script into the container
@@ -24,7 +24,7 @@ COPY certbot-renew /etc/cron.d/certbot-renew
 RUN chmod 0644 /etc/cron.d/certbot-renew
 
 # Start the cron service and Apache server
-CMD cron && apache2-foreground
+CMD ["sh", "-c", "cron && apache2-foreground"]
 
 # Expose ports 80 and 443 for HTTP and HTTPS traffic
 EXPOSE 80 443
