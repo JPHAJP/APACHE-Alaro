@@ -39,7 +39,7 @@ Run the following commands:
 
 7. Get an SSL certificate (https):
 You will have to chenge example.com and www.example.com with your domain.
-    docker exec -it web-php certbot --apache -d example.com -d www.example.com
+    docker exec -it web-php certbot --apache -d example.com
 
 8. Verification
     #Docker running?
